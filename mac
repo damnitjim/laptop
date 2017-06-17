@@ -10,13 +10,13 @@
 # | |_) | | |  __/\ V  V /  |  _| (_) | |  | | | | | | |_| | | (_| |  __/
 # |_.__/|_|  \___| \_/\_/   |_|  \___/|_|  |_| |_| |_|\__,_|_|\__,_|\___|
 # These are the apps installed by Homebrew
-brew_formulae=(postgresql redis the_silver_searcher vim ctags tmux
+brew_formulae=(autoenv postgresql redis vim ctags tmux mongodb memcached
                reattach-to-user-namespace imagemagick qt watch gh nvm rbenv
-               rbenv-gem-rehash ruby-build colordiff curl docker elasticsearch
-               erlang go graphviz mackup mercurial mysql pandoc
-               phantomjs pyenv-virtualenv pyenv-virtualenvwrapper python
-               rbenv-binstubs rbenv-bundler rbenv-gem-rehash ruby-build
-               selenium-server-standalone wget xclip zsh zsh-completions
+               ruby-build colordiff curl docker elasticsearch
+               erlang elixir go graphviz mysql
+               pyenv-virtualenv pyenv-virtualenvwrapper python
+               rbenv-binstubs rbenv-bundler ruby-build
+               wget xclip zsh zsh-completions
                zsh-syntax-highlighting)
 
 #  _                                       _
@@ -25,14 +25,16 @@ brew_formulae=(postgresql redis the_silver_searcher vim ctags tmux
 # | |_) | | |  __/\ V  V /  | (_| (_| \__ \   <\__ \
 # |_.__/|_|  \___| \_/\_/    \___\__,_|___/_|\_\___/
 # These are mac apps that brew cask can manage
-brew_casks=(adium anvil atom audacity battery-guardian box-sync caffeine firefox
-            gimp gitx-rowanj google-chrome inkscape intellij-idea-ce iterm2 java
-            launchrocket limechat livereload mactex protege skitch skype vagrant
-            vagrant-manager virtualbox xquartz)
+brew_casks=(alfred anki anvil atom caffeine dash dropbox emacs flux firefox 1password
+            google-chrome iterm2 java wallpaper-wizard spotify smcfancontrol
+            launchrocket skype vagrant vox vlc typora transmission keycastr kindle
+            vagrant-manager virtualbox virtualbox-extension-pack xquartz)
 # TODO: caffeine is failing to download today
 
-npm_packages=(grunt-cli bower protractor mocha styledocco chai chai-as-promised
-              karma selenium-webdriver astrolabe gulp)
+npm_packages=() 
+
+#(grunt-cli bower protractor mocha styledocco chai chai-as-promised
+#              karma selenium-webdriver astrolabe gulp)
 
 #  ____        _            ____
 # |  _ \ _   _| |__  _   _ / ___| ___ _ __ ___  ___
@@ -313,7 +315,6 @@ fi
 
 fancy_echo "Setting $ruby_version as global default Ruby ..."
   rbenv global "$ruby_version"
-  rbenv rehash
 
 fancy_echo "Updating to latest Rubygems version ..."
   gem update --system
