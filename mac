@@ -35,7 +35,7 @@ brew_casks=(alfred anki anvil atom dash dropbox emacs flux firefox 1password
 # | |\  | (_) | (_| |  __/| \__ \
 # |_| \_|\___/ \__,_|\___|/ |___/
 #                       |__/
-npm_packages=(grunt-cli, gulp, gulp-cli, webpack mocha chai chai-as-promised
+npm_packages=(grunt-cli, gulp, gulp-cli, webpack mocha chai chai-as-promised babel
               karma uglify-js react flux redux selenium-webdriver eslint typescript)
 # npm scripts over grunt-cli or gulp for building
 
