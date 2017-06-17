@@ -25,7 +25,7 @@ brew_formulae=(autoenv colordiff ctags tmux vim gh docker graphviz wget curl
 # | |_) | | |  __/\ V  V /  | (_| (_| \__ \   <\__ \
 # |_.__/|_|  \___| \_/\_/    \___\__,_|___/_|\_\___/
 # These are mac apps that brew cask can manage
-brew_casks=(alfred anki anvil atom dash dropbox emacs flux firefox 1password
+brew_casks=(alfred anki anvil atom dash emacs flux firefox github-desktop
             google-chrome iterm2 java spotify launchrocket skype vox vlc typora
             transmission keycastr kindle xquartz
             vagrant vagrant-manager virtualbox virtualbox-extension-pack)
@@ -38,9 +38,6 @@ brew_casks=(alfred anki anvil atom dash dropbox emacs flux firefox 1password
 npm_packages=(grunt-cli, gulp, gulp-cli, webpack mocha chai chai-as-promised babel
               karma uglify-js react flux redux selenium-webdriver eslint typescript)
 # npm scripts over grunt-cli or gulp for building
-
-#(grunt-cli bower protractor mocha styledocco chai chai-as-promised
-#              karma selenium-webdriver astrolabe gulp)
 
 #  ____        _            ____
 # |  _ \ _   _| |__  _   _ / ___| ___ _ __ ___  ___
@@ -181,10 +178,10 @@ brew_install_or_upgrade "git"
 fancy_echo "Checking if brew-cask is installed ..."
 if containsElement "brew-cask" "${installed[@]}"; then
   if containsElement "brew-cask" "${outdated[@]}"; then
-    brew upgrade caskroom/cask/brew-cask
+    brew tap caskroom/cask
   fi
 else
-  brew install caskroom/cask/brew-cask
+  brew tap caskroom/cask
 fi
 
 echo
@@ -193,8 +190,8 @@ echo -n "Installing casks: "
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 for cask in "${brew_casks[@]}"; do
   echo -n "$cask..."
-  if ! brew cask list -1 | grep -Fqx "$cask"; then
-    brew cask install "$cask"
+   if ! brew cask list -1 | grep -Fqx "$cask"; then
+    brew cask reinstall "$cask"
   fi
 done
 
@@ -283,32 +280,32 @@ echo " |  \| |/ _ \ / _\` |/ _ \  | / __| "
 echo " | |\  | (_) | (_| |  __/_ | \__ \ "
 echo " |_| \_|\___/ \__,_|\___(_)/ |___/ "
 echo "                         |__/      "
-node_version="0.10"
+node_version="stable"
 
 fancy_echo "Installing NVM, Node.js, and NPM, for running apps and installing JavaScript packages ..."
-  brew_install_or_upgrade 'nvm'
+brew_install_or_upgrade 'nvm'
 
-  append_to_zshrc 'export PATH="$PATH:/usr/local/lib/node_modules"'
-  if [[ ! -d "$HOME/.nvm/" ]]; then
-    mkdir "$HOME/.nvm"
-  fi
-  append_to_zshrc 'export NVM_DIR="$HOME/.nvm"'
-  append_to_zshrc 'source $(brew --prefix nvm)/nvm.sh' 1
+append_to_zshrc 'export PATH="$PATH:/usr/local/lib/node_modules"'
+if [[ ! -d "$HOME/.nvm/" ]]; then
+  mkdir "$HOME/.nvm"
+fi
+append_to_zshrc 'export NVM_DIR="$HOME/.nvm"'
+append_to_zshrc 'source $(brew --prefix nvm)/nvm.sh' 1
 
-  source $(brew --prefix nvm)/nvm.sh
-  nvm install "$node_version"
+source $(brew --prefix nvm)/nvm.sh
+nvm install "$node_version"
 
-  fancy_echo "Setting $node_version as the global default nodejs..."
-  nvm alias default "$node_version"
+fancy_echo "Setting $node_version as the global default nodejs..."
+nvm alias default "$node_version"
 
-  # TODO: skip installed packages
-  # installed_pkgs=$(npm list --parseable=true --global=true)
-  fancy_echo "Installing Standard Npm packages ..."
-  echo -n "Checking packages: "
-  for pkg in "${npm_packages[@]}"; do
-    echo -n "$pkg..."
-    npm update -g $pkg
-  done
+# TODO: skip installed packages
+# installed_pkgs=$(npm list --parseable=true --global=true)
+fancy_echo "Installing Standard Npm packages ..."
+echo -n "Checking packages: "
+for pkg in "${npm_packages[@]}"; do
+  echo -n "$pkg..."
+  npm update -g $pkg
+done
 
 echo
 echo "  ____        _            "
