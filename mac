@@ -17,7 +17,8 @@ brew_formulae=(autoenv colordiff ctags tmux vim gh docker graphviz wget curl
                nvm
                pyenv pyenv-virtualenv pyenv-virtualenvwrapper
                rbenv rbenv-binstubs rbenv-bundler ruby-build
-               zsh zsh-completions zsh-syntax-highlighting)
+               zsh zsh-completions zsh-syntax-highlighting
+               awscli terraform)
 
 #  _                                       _
 # | |__  _ __ _____      __   ___ __ _ ___| | _____
@@ -45,9 +46,10 @@ npm_packages=(grunt-cli, gulp, gulp-cli, webpack mocha chai chai-as-promised bab
 # |  _ <| |_| | |_) | |_| | |_| |  __/ | | | | \__ \
 # |_| \_\\__,_|_.__/ \__, |\____|\___|_| |_| |_|___/
 #                    |___/
-rubygems=(bundler gemedit guard guard-rake guard-shell hirb jekyll json json-schema
-          jsonpath libv8 minitest minitest-colorize minitest-context
-          minitest-documentation pg pry pry-byebug pry-nav pry-rails rails
+rubygems=(bundler gemedit guard guard-rake guard-shell guard-livereload hirb
+          jekyll json json-schema jsonpath libv8 pg
+          minitest minitest-colorize minitest-context minitest-documentation
+          pry pry-byebug pry-nav pry-rails rails
           rb-fsevent rb-inotify sinatra therubyracer thin thor wraith)
 
 #  ____        _   _                 _____
